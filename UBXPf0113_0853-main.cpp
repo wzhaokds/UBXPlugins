@@ -4,7 +4,7 @@
 
 int main(int argc, char* argv[]) {
     if (argc < 5) {
-	cerr << argv[0] << ": expecting 5 args, product asofdate wac wam wala" << endl;
+	cerr << argv[0] << ": expecting 5 args, Product(FN|FH|G1|G2) AsofMonth(YYYYMM) spread(in bps) wam wala" << endl;
 	exit(0);
     }
     cout <<"ok, executing"<< endl;

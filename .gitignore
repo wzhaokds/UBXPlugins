@@ -1,0 +1,6 @@
+*~
+*.o
+a.out
+junk*
+*.a
+try*

@@ -8,9 +8,9 @@ else # defaults to the C++ compiler from a devtoolset-7
 endif
 CXXFLAGS = -std=c++11
 INCLUDES =
-Main = UBXPf0113_0853
-Objs = $(Main).o
-Lib = lib$(Main).a
+Main = UBXPf0113_0853 UBXPf0122_3280
+Objs = UBXPf0113_0853.o UBXPf0122_3280.o
+Lib =  libUBXPf0113_0853.a libUBXPf0122_3280.a
 
 all: $(Main)
 .PHONY: all clean
@@ -18,11 +18,17 @@ all: $(Main)
 .cpp.o:
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
-$(Lib): $(Objs)
-	$(AR) $@ $(Objs)
+libUBXPf0113_0853.a: UBXPf0113_0853.o
+	$(AR) $@ $^
 
-$(Main): $(Main)-main.o $(Lib)
-	$(CXX) $(CXXFLAGS) -o $@ $(Main)-main.o -L. -l$(Main)
+libUBXPf0122_3280.a: UBXPf0122_3280.o
+	$(AR) $@ $^
+
+UBXPf0113_0853: UBXPf0113_0853-main.o libUBXPf0113_0853.a
+	$(CXX) $(CXXFLAGS) -o $@ $(@)-main.o -L. -l$(@)
+
+UBXPf0122_3280: UBXPf0122_3280-main.o libUBXPf0122_3280.a
+	$(CXX) $(CXXFLAGS) -o $@ $(@)-main.o -L. -l$(@)
 
 clean:
 	rm -f *.o $(Main) $(Lib)
@@ -59,3 +65,6 @@ season: season-all.txt
 			tr -d ' ' |tr '\n' ',' |sed 's/^,//; s/,$$//' )"}, // $$prod"; \
 	done; done; echo '};'
 
+StateHPIs: statehpi_2018Q3.txt
+	echo "const vector<pair<int, vector<double>>> StateHPIs\n{"; tr '\t' , <statehpi_2018Q3.txt |head -1 |sed 's/^/\/\/ /'; \
+	tr '\t' , <statehpi_2018Q3.txt |sed '1d; s/^/{/; s/,/,{/; s/$$/}},/'; echo "};"

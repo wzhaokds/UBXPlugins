@@ -41,12 +41,12 @@ UBXPf0113_0853::UBXPf0113_0853() :
 
 }
 
-double UBXPf0113_0853::fCalc(const string& sProgID, int iAsofdt, double fSpread, double fWAM, double fWALA) const {
+double UBXPf0113_0853::fCalc(const string& sProgID, int iAsofMonth, double fSpread, double fWAM, double fWALA) const {
     int oterm = lround(fWAM + fWALA);
     auto it = name2Prod_.find(sProgID.substr(0,2) + (oterm > 270? string("30"): string("15")));
     int prod = it != name2Prod_.end() ? it->second: FN30; // default to FN30
 
-    int month = (iAsofdt) % 100 - 1;
+    int month = (iAsofMonth) % 100 - 1;
     int age = min<int>(aCurves_[prod].size()-1, lround(fWALA)); // round to an integer age field
     int spreadOffset = min<int>(sCurveRanges_[prod].second - sCurveRanges_[prod].first, lround(fSpread) - sCurveRanges_[prod].first);
     //cout << prod<<','<<month<<','<<age<<','<<spreadOffset<<'\n';

@@ -9,8 +9,8 @@ class UBXPf0113_0853 : public UBXP0113
 {
 public:
     UBXPf0113_0853();
-    double fCalc(const string& sProd, int iAsofdt, double fWAC, double fWAM, double fWALA) const;
-
+    double fCalc(const string& sProd, int iAsofMonth, double fSpread, double fWAM, double fWALA) const;
+    // prod: e.g., FN30, G230, etc; iAsofMonth: the preyment month in YYYYMM; fSpread: WAC vs market rate in bps; fWALA: loan age
 private:
     vector<vector<double> > aCurves_;      // CPR vector age 0 to 360/180 for each product
     vector<vector<double> > seasonality_;  // seasonality multiplier for each product

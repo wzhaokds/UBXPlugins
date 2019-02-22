@@ -12,7 +12,7 @@ git clone https://github.com/wzhaokds/UBXPlugins.git
 
 Then in the UBXPlugins folder, run
 
-make all
+make
 
 which will build the library and a test program. To run the test program, you can run it with and see the following output:
 
@@ -21,4 +21,6 @@ which will build the library and a test program. To run the test program, you ca
 ok, executing
 
 UBXpf0113_0853.fCalc() = 7.10773
+
+In the "make" process, a static library libUBXPf0113_0853.a is also produced. This library and the corresponding header file, UBXPf0113_0853.hpp, are the only two files needed for integrating with our UBX system.
 

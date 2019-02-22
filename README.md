@@ -16,7 +16,7 @@ make
 
 which will build the library and a test program. To run the test program, you can run it with and see the following output:
 
-./UBXPf0113_0853 FN30 201801 5 350 10
+./UBXPf0113_0853 FN30 201901 5 350 10
 
 ok, executing
 
